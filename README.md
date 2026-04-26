@@ -14,4 +14,4 @@ tangan ke kiri mulai video
 ke kanan stop
 
 kalo mau stop cmd
-ke termina lalu ctrl+c
+ke terminal lalu ctrl+c
