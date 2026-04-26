@@ -10,7 +10,7 @@ try:
 except:
     print("Peringatan: File kicau_mania.mp3 tidak ditemukan!")
 
-# Load the hand landmark model (download from MediaPipe repo if not present)
+
 model_path = "hand_landmarker.task"
 base_options = python.BaseOptions(model_asset_path=model_path)
 options = vision.HandLandmarkerOptions(base_options=base_options,
@@ -35,19 +35,18 @@ while True:
     img = cv2.flip(img, 1)
     img = cv2.resize(img, (WIN_W, WIN_H))
 
-    # Convert to MediaPipe Image
     mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     result = detector.detect(mp_image)
 
     if result.hand_landmarks:
         for handLms in result.hand_landmarks:
-            # Draw landmarks manually
+            
             for lm in handLms:
                 h, w, _ = img.shape
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 cv2.circle(img, (cx, cy), 5, (0, 255, 0), -1)
 
-            # Use index finger tip (landmark 8)
+            
             x_pos = handLms[8].x
 
             if x_pos < 0.3 and not show_second_window:
